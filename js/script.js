@@ -1,5 +1,5 @@
 'use strict';
-{const titleClickHandler = function(event){
+const titleClickHandler = function(event){
   const clickedElement = this;
   console.log('Link was clicked!');
   console.log(event);
@@ -31,15 +31,11 @@
       console.log(targetArticle)
   /* [DONE]add class 'active' to the correct article */
       targetArticle.classList.add('active');
-}
-const links = document.querySelectorAll('.titles a');
-  console.log(links)
-  for(let link of links){
-  link.addEventListener('click', titleClickHandler);
-}
 
 
 }
+
+
 
 const optArticleSelector ='.post',
   optTitleSelector = '.post-title',
@@ -59,6 +55,7 @@ const optArticleSelector ='.post',
     /* for each article */
     const articles = document.querySelectorAll(optArticleSelector)
     let html = '';
+    
     for(let article of articles){
       
       console.log(article)
@@ -96,7 +93,11 @@ const optArticleSelector ='.post',
     /* insert link into titleList */
     titleList.innerHTML = html;
     
-  
+    const links = document.querySelectorAll('.titles a');
+  console.log(links)
+  for(let link of links){
+  link.addEventListener('click', titleClickHandler);
+}
     
     
   }
