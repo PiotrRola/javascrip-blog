@@ -41,7 +41,6 @@ const links = document.querySelectorAll('.titles a');
 
 }
 
-
 const optArticleSelector ='.post',
   optTitleSelector = '.post-title',
   optTitleListSelector = '.titles',
