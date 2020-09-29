@@ -41,7 +41,10 @@ const optArticleSelector ='.post',
   optTitleSelector = '.post-title',
   optTitleListSelector = '.titles',
   optArticleTagsSelector = '.post-tags .list',
-  optArticleAuthorSelector = '.post-author';
+  optArticleAuthorSelector = '.post-author',
+  optTagsListSelector = '.tags.list',
+  optCloudClassCount = '5',
+  optCloudClassPrefix = 'tag-size-';
   function generateTitleLinks(customSelector = ''){
   
 
@@ -106,7 +109,31 @@ const optArticleSelector ='.post',
 generateTitleLinks();
 
 
+function calculateTagsParams(tags){
+   const params = {max: '0' , min: '999999' };
+   
+   for(let tag in tags){
+    console.log(tag + ' is used ' + tags[tag] + ' times');
+    if (tags[tag] > params.max) {
+      params.max = tags[tag];
+    }
+
+    if (tags[tag] < params.min) {
+      params.min = tags[tag];
+    }
+  }
+
+  return params;
+  
+ } 
+function calculateTagClass(count, params) {
+ 
+}
+
 function generateTags(){
+  /* [NEW] create a new variable allTags with an empty array */
+  let allTags = {};
+  
   /* find all articles */
   const articles = document.querySelectorAll(optArticleSelector)
   console.log(articles)
@@ -136,14 +163,39 @@ function generateTags(){
       /* add generated code to html variable */
       html = html + tagHTML
       console.log(html)
-
+      /* [NEW] check if this link is NOT already in allTags */
+      if(!allTags[tag]) {
+      /* [NEW] add tag to allTags object */
+        allTags[tag] = 1;
+      } else {
+        allTags[tag]++;
+      }
     /* END LOOP: for each tag */
     }
     /* insert HTML of all the links into the tags wrapper */
     titleList.innerHTML = html;
   /* END LOOP: for every article: */
   }
-}
+  /* [NEW] find list of tags in right column */
+  const tagList = document.querySelector('.tags');
+  console.log(tagList)
+  
+  
+  /* [NEW] create variable for all links HTML code */
+  const tagsParams = calculateTagsParams(allTags);
+  console.log('tagsParams:', tagsParams)
+  let allTagsHTML = '';
+  
+  /* [NEW] START LOOP: for each tag in allTags: */
+  for(let tag in allTags){
+  /* [NEW] generate code of a link and add it to allTagsHTML */
+  allTagsHTML += '<li><a href="#tag-' + tag + '">' + tag + '</a></li>' + ' (' + allTags[tag] + ') ';
+  }
+/* [NEW] END LOOP: for each tag in allTags: */
+
+/*[NEW] add HTML from allTagsHTML to tagList */
+tagList.innerHTML = allTagsHTML;
+  }
 
 generateTags();
 
@@ -186,8 +238,8 @@ function tagClickHandler(event){
 
 function addClickListenersToTags(){
   /* find all links to tags */
-  const allTagLinks = document.querySelectorAll('.post-tags a')
-  
+  const allTagLinks = document.querySelectorAll('.post-tags a, .list.tags a')
+  console.log(allTagLinks)
   /* START LOOP: for each link */
   for (let allTagLink of allTagLinks){
     /* add tagClickHandler as event listener for that link */
