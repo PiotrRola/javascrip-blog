@@ -1,9 +1,14 @@
 'use strict';
+const templates = {
+  articleLink: Handlebars.compile(document.querySelector('#template-article-link').innerHTML)
+  tagLink: Handlebars.compile(document.querySelector('#template-tag-link').innerHTML),  
+}
+
 const titleClickHandler = function(event){
   const clickedElement = this;
   console.log('Link was clicked!');
   console.log(event);
-  event.preventDefault();
+  event.preventDefault()
   
   /* [DONE]remove class 'active' from all article links  */
       const activeLinks = document.querySelectorAll('.titles a.active');
@@ -86,7 +91,8 @@ const optArticleSelector ='.post',
     
 
     /* create HTML of the link */
-    const linkHTML = '<li><a href="#' + articleId + '"><span>' + articleTitle + '</span></a></li>';
+    const linkHTMLData = {id: articleId, title: articleTitle};
+    const linkHTML = templates.articleLink(linkHTMLData);
     
     console.log(linkHTML)
 
@@ -161,10 +167,12 @@ function generateTags(){
     for(let tag of articleTagsArray){
       console.log(tag)
       /* generate HTML of the link */
-      const tagHTML = '<li><a href="#tag-' + tag + '">' + tag + '</a></li>';
-      console.log(tagHTML)
+      /*const tagHTML = '<li><a href="#tag-' + tag + '">' + tag + '</a></li>';*/
       
-      
+      const linkHTMLData = {id: tag, title: tag};
+      const linkHTML = templates.tagLink(linkHTMLData);  
+      console.log(linkHTML);
+
       /* add generated code to html variable */
       html = html + tagHTML
       console.log(html)
