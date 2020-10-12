@@ -93,7 +93,7 @@ const optArticleSelector ='.post',
     
 
     /* create HTML of the link */
-    /*const linkHTML = '<li><a href="#' + articleId + '"><span>' + articleTitle + '</span></a></li>';*/
+    
     const linkHTMLData = {id: articleId, title: articleTitle};
     const linkHTML = templates.articleLink(linkHTMLData);
     console.log(linkHTML)
@@ -169,7 +169,7 @@ function generateTags(){
     for(let tag of articleTagsArray){
       console.log(tag)
       /* generate HTML of the link */
-      /*const tagHTML = '<li><a href="#tag-' + tag + '">' + tag + '</a></li>';*/
+      
       const linkHTMLData = {id: tag, title: tag};
       const tagHTML = templates.tagLink(linkHTMLData);
       console.log(tagHTML)
@@ -205,7 +205,7 @@ function generateTags(){
   /* [NEW] START LOOP: for each tag in allTags: */
   for(let tag in allTags){
   /* [NEW] generate code of a link and add it to allTagsHTML */
-    /*allTagsHTML += '<li><a class="tag-size-' + calculateTagClass(allTags[tag], tagsParams) + '" href="#tag-' + tag + '">' + tag + '</a></li>' + ' (' + allTags[tag] + ') ';*/
+    
   
     allTagsData.tags.push({
       tag: tag,
@@ -298,9 +298,7 @@ function generateAuthors(){
     console.log(author);
 
       /* generate HTML of the author link */
-      /*const authorLinkHTML =
-      '<a href="#author-' + author + '">' + author + '</a>';
-    console.log(authorLinkHTML);*/
+      
     const linkHTMLData = {id: author, title: author};
     const authorLinkHTML = templates.authorLink(linkHTMLData);
 
@@ -329,8 +327,7 @@ function generateAuthors(){
   for (let author in allAuthors) {
     /* [NEW] generate code of a link and add it to allAuthorsHTML */
 
-    /*allAuthorsHTML += '<li><a href="#author-' + author +'">' + author +' (' + allAuthors[author] + ') </a></li> ';
-  }*/
+    
       allAuthorsData.authors.push({
       author: author,
       count: allAuthors[author]
