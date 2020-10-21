@@ -321,7 +321,7 @@ function generateAuthors(){
   /* [NEW] find list of authors in right column */
   const authorsList = document.querySelector('.authors');
   /* [NEW] create variable for all links HTML code */
-  /*let allAuthorsHTML = '';*/
+  
   const allAuthorsData = {authors: []};
   /* [NEW] START LOOP: for each author in allAuthors: */
   for (let author in allAuthors) {
@@ -336,7 +336,7 @@ function generateAuthors(){
   
   /* [NEW] add html from allAuthorsHTML to authorList */
 
-  /*authorList.innerHTML = allAuthorsHTML;*/
+  
     authorsList.innerHTML = templates.authorsListLink(allAuthorsData);
     console.log(allAuthorsData);
 }
